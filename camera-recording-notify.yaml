@@ -55,7 +55,26 @@ blueprint:
 
     notify_action:
       name: Notify action
-      description: 通知动作（需自定义通知服务）
+      description: |
+        通知动作
+        ```yaml
+        action: notify.mobile_app_your_iphone
+        data:
+          title: '{{ home_name }}{{ camera_device_name }}'
+          message: '{{ event }} 🔋{{ battery }}%'
+          data:
+            video: '{{ mp4_path }}'
+            image: '{{ img_path }}'
+            url: /config/devices/device/{{ camera_device_id }}
+            actions:
+              - action: URI
+                title: 打开米家
+                uri: '{{ app_link }}'
+              - action: none
+                title: 我知道了
+            push:
+              tag: '{{ camera_entity_id }}'
+        ```
       selector:
         action:
       default: ''
